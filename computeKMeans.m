@@ -1,3 +1,4 @@
+%TODO change stopping criteria
 function [clusterSSE,centroid,minDist] = computeKMeans(seeds, centroid,k)
     cluster = zeros(size(seeds,1),1);
     clusterSSE = 0;
