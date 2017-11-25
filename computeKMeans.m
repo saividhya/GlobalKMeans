@@ -1,5 +1,5 @@
 %TODO change stopping criteria
-function [clusterSSE,centroid,minDist] = computeKMeans(seeds, centroid,k)
+function [clusterSSE,centroid,minDist,cluster] = computeKMeans(seeds, centroid,k)
     cluster = zeros(size(seeds,1),1);
     clusterSSE = 0;
     
@@ -11,7 +11,6 @@ function [clusterSSE,centroid,minDist] = computeKMeans(seeds, centroid,k)
         prevcluster = cluster;
         prevclusterSSE = clusterSSE;
         [minDist, cluster] = min(distance,[],2);
-        %unique(cluster)
     %compute SSE for the cluster
         clusterSSE = sum(minDist.^2);
     %calculate new centroid based on SSE delta
@@ -23,8 +22,4 @@ function [clusterSSE,centroid,minDist] = computeKMeans(seeds, centroid,k)
 %         if prevcluster == cluster
 %             break;
 %         end 
-%         for i = 1:k
-%             group = [group; mean(seeds(cluster==i,:))];           
-%         end
-%         centroid =group;
     end  

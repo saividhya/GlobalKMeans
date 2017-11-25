@@ -1,21 +1,10 @@
-function fastKmeansClustering_kd(seeds,k,bucket_size)
-figure(3);
-title('Fast with kd');
+function [e, centroid, purity] = fastKmeansClustering_kd(seeds,k,bucket_size,labels)
     kd = kd_tree(bucket_size, seeds, []);
-%     plot(seeds(:,1),seeds(:,2),'y.',kd(:,1),kd(:,2),'k.',kd(:,1),kd(:,2),'k+');
-%         drawnow;
-%         
-%     figure(2);set(1,'DoubleBuffer','on');
     centroid = mean(seeds);
-%     plot(seeds(:,1),seeds(:,2),'g.',centroid(1,1),centroid(1,2),'r.',centroid(1,1),centroid(1,2),'r+');
-%         drawnow;
-%         hold on
     distance = pdist2(seeds,centroid,'euclidean');
     [minDist, cluster] = min(distance,[],2);
     kddistance = pdist2(seeds,kd,'euclidean');
-%     size(kddistance)
     e = sum(minDist.^2);
-%     [e,centroid, minDist1] = computeKMeans(kd,centroid,1); 
     for i = 2:k 
         t = [];
         en = zeros(size(kd,1),1);
@@ -28,12 +17,7 @@ title('Fast with kd');
         end
         [minen, index] = min(en);
         t = [centroid; kd(index,:)+eps];
-        [e,centroid,minDist] = computeKMeans(seeds,t,i); 
-        plot(seeds(:,1),seeds(:,2),'g.',centroid(:,1),centroid(:,2),'k.',centroid(:,1),centroid(:,2),'kx');
-
-        drawnow;
-%                 hold on
+        [e,centroid,minDist,cluster] = computeKMeans(seeds,t,i); 
     end
-%     disp(['centroid ' centroid]);
-    disp(['Average SSE ' num2str(e)]);
+    purity = findPurity(cluster,labels);
 end

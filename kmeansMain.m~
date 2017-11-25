@@ -1,0 +1,27 @@
+seeds = loadMNISTImages('/Users/Rukmani/Masters/Sem3/FSL/Project/global_k_means/train-images-idx3-ubyte');
+seeds = seeds ./ (ones(size(seeds))*255);
+labels = loadMNISTLabels('/Users/Rukmani/Masters/Sem3/FSL/Project/global_k_means/train-labels-idx1-ubyte');
+k = linspace(3,15,13); 
+buckets = linspace(1,20,20);
+% writeToFile=[];
+for i= 1: k
+    [error_1, centroid_1, purity_1] = kmeansClustering(seeds',i,labels);
+    [error_2, centroid_2, purity_2] = globalKmeansClustering(seeds',i,labels);
+    for j = 1: buckets
+        [error_3, centroid_3, purity_3] = fastKmeansClustering_kd(seeds',i,j,labels);
+        KDWriteToFile = [KDWriteToFile; j error_3];
+        if j == 15
+            centroid_15 = centroid_3;
+            errorWriteToFile = [errorWriteToFile; k error_1 error_2 error_3];
+            purityWriteToFile = [purityWriteToFile; k purity_1 purity_2 purity_3];
+        end
+    end
+end
+csvwrite('SSE.dat',errorWriteToFile);
+csvwrite('Purity.dat',purityWriteToFile);
+csvwrite('KD.dat',KDWriteToFile);
+csvwrite('centroid_1.dat', centroid_1);
+csvwrite('centroid_2.dat',centroid_2);
+csvwrite('KD.dat',centroid_15);
+% fileWrite(errorWriteToFile,'SSE');
+% fileWrite(purityWriteToFile,'Purity');
