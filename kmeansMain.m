@@ -3,7 +3,7 @@ function kmeansMain(seeds,labels,method)
     errorWriteToFile = [];
     purityWriteToFile = [];
     runtimeWriteToFile = [];
-    for i= 3: 5
+    for i= 3: 15
         tic;
         [error_1, centroid_1, purity_1] = kmeansClustering(seeds,i,labels);
         time1 = toc;
