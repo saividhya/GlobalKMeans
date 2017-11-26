@@ -14,10 +14,13 @@ function [clusterSSE,centroid,minDist,cluster] = computeKMeans(seeds, centroid,k
     %compute SSE for the cluster
         clusterSSE = sum(minDist.^2);
     %calculate new centroid based on SSE delta
-        delta = abs(clusterSSE - prevclusterSSE);
-        if delta < 0.001
-          break;
-        end
+%         delta = abs(clusterSSE - prevclusterSSE);
+%         if delta < 0.001
+%           break;
+%         end
+        if prevcluster == cluster
+            break;
+        end 
         centroid = splitapply(@(x)mean(x,1),seeds,cluster);
 %         if prevcluster == cluster
 %             break;

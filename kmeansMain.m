@@ -1,4 +1,6 @@
 function kmeansMain(seeds,labels,method)
+csvwrite(strcat('data/',strcat(method,'_SSE.dat')),seeds);
+    
     KDWriteToFile = [];
     errorWriteToFile = [];
     purityWriteToFile = [];
@@ -23,12 +25,11 @@ function kmeansMain(seeds,labels,method)
         runtimeWriteToFile = [runtimeWriteToFile; i time1 time2 time3];
     end
 
-    csvwrite(strcat(method,'_seeds.dat'),seeds);
-    csvwrite(strcat(method,'_SSE.dat'),errorWriteToFile);
-    csvwrite(strcat(method,'_Purity.dat'),purityWriteToFile);
+    csvwrite(strcat('data/',strcat(method,'_SSE.dat')),errorWriteToFile);
+    csvwrite(strcat('data/',strcat(method,'_Purity.dat')),purityWriteToFile);
     %csvwrite(strcat(method,'_KD.dat'),KDWriteToFile);
-    csvwrite(strcat(method,'_runtime.dat'),runtimeWriteToFile);
-    csvwrite(strcat(method,'_centroid_1.dat'), centroid_1);
-    csvwrite(strcat(method,'_centroid_2.dat'),centroid_2);
-    csvwrite(strcat(method,'_centroid_3.dat'),centroid_3);
+    csvwrite(strcat('data/',strcat(method,'_runtime.dat')),runtimeWriteToFile);
+    csvwrite(strcat('data/',strcat(method,'_centroid_1.dat')), centroid_1);
+    csvwrite(strcat('data/',strcat(method,'_centroid_2.dat')),centroid_2);
+    csvwrite(strcat('data/',strcat(method,'_centroid_3.dat')),centroid_3);
 end
