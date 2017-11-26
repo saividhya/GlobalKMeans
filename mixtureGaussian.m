@@ -5,15 +5,18 @@
 % seeds = seeds ./ (ones(size(seeds))*255);
 % labels = loadMNISTLabels('/Users/Rukmani/Masters/Sem3/FSL/Project/global_k_means/train-labels-idx1-ubyte');
 % seeds = [labels seeds'];
+
 % input1 = [];
 % for i = 0:9
 %     mat = seeds(seeds(:,1)==i,:);
 %     
 %     input1 = [input1; mat(1:500,:)];
 % end
+[coeff,score,latent] = pca(input1(:,2:785));
+input = score(:,1:10);
 % size(input1)
-% kmeansMain(input1(:,2:785),input1(:,1),'MNIST');
-% 
+% kmeansMain(input,input1(:,1),'MNIST');
+
 % kmeansMain(meas,findgroups(species),'Iris');
 
 Mu = [1 -3;-3 -5;3 -6];
