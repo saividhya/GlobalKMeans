@@ -10,6 +10,5 @@ function [centroid]= kd_tree(bucket_size,seeds,centroid)
         right = seeds(j >= 0,:);
         centroid = kd_tree(bucket_size,left,centroid);
         centroid = kd_tree(bucket_size,right,centroid);
-        
     end
 end

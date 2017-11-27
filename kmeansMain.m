@@ -1,6 +1,6 @@
 function kmeansMain(seeds,labels,method)
-csvwrite(strcat('data/',strcat(method,'_SSE.dat')),seeds);
-    
+csvwrite(strcat('data/',strcat(method,'_seeds.dat')),seeds);
+csvwrite(strcat('data/',strcat(method,'_labels.dat')),labels);
     KDWriteToFile = [];
     errorWriteToFile = [];
     purityWriteToFile = [];
@@ -16,7 +16,7 @@ csvwrite(strcat('data/',strcat(method,'_SSE.dat')),seeds);
         time2 = toc;
         disp(time2);
         tic;
-        [error_3, centroid_3, purity_3] = fastKmeansClustering_kd(seeds,i,j,labels);
+        [error_3, centroid_3, purity_3] = fastKmeansClustering_kd(seeds,i,15,labels);
         time3 = toc;
         disp(time3);
         %KDWriteToFile = [KDWriteToFile; j error_3];
@@ -24,7 +24,6 @@ csvwrite(strcat('data/',strcat(method,'_SSE.dat')),seeds);
         purityWriteToFile = [purityWriteToFile; i purity_1 purity_2 purity_3];
         runtimeWriteToFile = [runtimeWriteToFile; i time1 time2 time3];
     end
-
     csvwrite(strcat('data/',strcat(method,'_SSE.dat')),errorWriteToFile);
     csvwrite(strcat('data/',strcat(method,'_Purity.dat')),purityWriteToFile);
     %csvwrite(strcat(method,'_KD.dat'),KDWriteToFile);

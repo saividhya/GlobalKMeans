@@ -27,7 +27,7 @@ Er=[]; TEr=[];              % error monitorring
 
 THRESHOLD = 1e-4;   % relative change in error that is regarded as convergence
 nb        = 0;  
-
+clf(figure(1));
 if pl; figure(1);set(1,'DoubleBuffer','on');end
 
 % initialize 
@@ -42,11 +42,16 @@ elseif dyn==2        % use kd-tree results as means
   nb     = size(M,1);
   dyn    = 0;
 elseif dyn==3
+    disp(1.5*n/bs);
   L      = kdtree(X,[1:n]',[],1.5*n/bs);  
   nb     = size(L,1);
   k      = 1;
   M      = mean(X);
   K      = sqdist(X',L');
+clf(figure(30))
+figure(30);
+plot(X(:,1),X(:,2),'g.',L(:,1),L(:,2),'k.',L(:,1),L(:,2),'kx');
+figure(33);
 elseif dyn==4
   k      = 1;
   M      = mean(X);
@@ -83,9 +88,11 @@ while k <= kmax
   end
 
  if 1-Wnew/Wold < THRESHOLD*(10-9*(k==kmax))
+     
     if dyn & k < kmax
-   
+  
       if dyn == 4
+  
         best_Er = Wnew; 
 
         for i=1:n;
@@ -112,6 +119,7 @@ while k <= kmax
         k = k+1;
 
       else 
+  
         % try to add a new cluster on some point x_i
         [tmp,new] = max(sum(max(repmat(Dwin,1,size(K,2))-K,0)));
         k = k+1;
@@ -122,6 +130,7 @@ while k <= kmax
         if ~isempty(T); tmp=sqdist(T',M'); TEr=[TEr; sum(min(tmp,[],2))];end;
       end
     else
+   
       k = kmax+1;
     end  
   end

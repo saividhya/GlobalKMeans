@@ -17,6 +17,5 @@ function fastKmeansClustering(seeds,k)
         t = [centroid; seeds(index,:)];
         [e,centroid] = computeKMeans(seeds,t,i);       
     end
-%     disp(['centroid ' centroid]);
     disp(['Average SSE ' num2str(e)]);
 end   
