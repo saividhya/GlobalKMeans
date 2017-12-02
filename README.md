@@ -1,7 +1,7 @@
 Project 1: Global K-means clustering algorithm
 
-Saividhya Saibaba
-Rukmani Ganapathy Seetharaman
+Saividhya Saibaba - 1211191602
+Rukmani Ganapathy Seetharaman - 1211210075
 
 List of files under code/ folder 
 ---------------------------------
