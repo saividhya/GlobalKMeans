@@ -13,7 +13,7 @@ fastKmeansClustering.m    -   Computes k centroids using fast-global k-means alg
 fastKmeansClustering_kd.m -   Computes k centroids using fast-global k-means with k-d tree 
 kd_tree.m                 -   K-D tree implementation
 kmeansMain.m              -   Calls every algorithm for k =3 to 15 and stores all intermediate values in dat files
-kmeansMain_kdbuckets.m    -   Executes fast global k-means with k-d tree for bucket numbers j = 1 to 20
+kmeansMain_kdbuckets.m    -   Executes fast global k-means with k-d tree for bucket numbers j = 1 to 15
 kmeansMain_normalavg.m    -   Executes normal k-means algorithm 100 times to compute average performance
 findPurity.m              -   Finds purity of clusters given labels
 kmeans_fast_main.m        -   Caller method to execute fast global k-means with k-d tree for different bucket numbers
