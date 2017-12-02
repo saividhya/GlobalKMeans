@@ -1,55 +1,30 @@
-%TODO x axis make it whole numbers
+X = csvread('MNIST_normal_SSE.dat');
+avgsse = csvread('MNIST_normal_avgSSE.dat');
+sse = csvread('MNIST_SSE.dat');
 
-%cluster representation with centroids (normal, global, kd)
-%       - centroid, seeds
-%   - one plot for MNIST
-%   - one plot for gaussian (separated, overlapping)
-%SSE for different k
-%       - k vakue, SSEs
-%   - one plot for MNIST
-%   - one plot for gaussian (separated, overlapping)
-%accuracy / purity (average of purity of all clusters)
-%       -k value purity
-%   - one plot for MNIST
-%   - one plot for gaussian (separated, overlapping)
-
-%MNIST
-for i=1:19
+for i=1:18
     clf(figure(i))
 end
-% sse = csvread('MNIST_SSE.dat');
-% figure(1);
-% plot(sse(:,1),sse(:,2), '-ko')
+
+figure(1);
+% boxplot(X(:,2),X(:,1))
 % hold on
-% plot(sse(:,1), sse(:,3), '-gx')
-% hold on
-% plot(sse(:,1),sse(:,4), '-r+');
-% title('Clustering error for MNIST data set');
-% xlabel(' Numbers of clusters k ') 
-% ylabel(' Clustering error ') 
-% legend('Normal k-means','Global k-means','Fast Global k-means with k-d','Location','northeast')
-% 
-% purity = csvread('MNIST_Purity.dat');
-% figure(2);
-% plot(purity(:,1),purity(:,2), '-ko');
-% hold on
-% plot(purity(:,1),purity(:,3), '-gx');
-% hold on
-% plot(purity(:,1),purity(:,4), '-r+');
-% hold on
-% title('Purity for MNIST data set');
-% xlabel(' Numbers of clusters k ') 
-% ylabel(' Purity ') 
-% legend('Normal k-means','Global k-means','Fast Global k-means with k-d','Location','northwest')
-% kd = csvread('MNIST_KD.dat');
-% figure(3);
-% plot(kd(:,1),kd(:,2), '-o');
+plot(avgsse(:,2), '-o')
+hold on
+plot(sse(:,3), '-kx')
+hold on
+plot(sse(:,4), '-r+');
+
+title('Clustering error for MNIST data set');
+xlabel(' Numbers of clusters k ') 
+ylabel(' Clustering error ') 
+legend('Normal k-means Avg. SSE','Global k-means','Fast Global k-means with k-d','Location','northeast')
 
 runtime = csvread('MNIST_runtime.dat');
-figure(4);
+figure(2);
 plot(runtime(:,1),runtime(:,2), '-ko');
 hold on
-plot(runtime(:,1),runtime(:,3), '-gx');
+plot(runtime(:,1),runtime(:,3), '-bx');
 hold on
 plot(runtime(:,1),runtime(:,4), '-r+');
 hold on
@@ -57,6 +32,28 @@ title('Runtime for MNIST data set');
 xlabel(' Numbers of clusters k ') 
 ylabel(' Runtime ') 
 legend('Normal k-means','Global k-means','Fast Global k-means with k-d','Location','northwest')
+
+purity = csvread('MNIST_Purity.dat');
+purity1 = csvread('MNIST_normal_avgPurity.dat');
+figure(3);
+plot(purity(:,1),purity1(:,2), '-ko');
+hold on
+plot(purity(:,1),purity(:,3), '-gx');
+hold on
+plot(purity(:,1),purity(:,4), '-r+');
+hold on
+title('Purity for MNIST data set');
+xlabel(' Numbers of clusters k ') 
+ylabel(' Purity ') 
+legend('Normal k-means','Global k-means','Fast Global k-means with k-d','Location','northwest')
+
+kdm = csvread('MNIST_KD.dat');
+figure(4);
+plot(kdm(:,1),kdm(:,2), '-ko')
+title('Bucket size vs Cluster SSE - MNIST');
+xlabel(' Numbers of buckets ') 
+ylabel(' Clustering error ') 
+legend('MNIST','Location','northeast')
 
 seeds = csvread('MNIST_seeds.dat');
 centroid1 = csvread('MNIST_centroid_1.dat');
@@ -76,40 +73,28 @@ figure(7);
 plot(seeds(:,1),seeds(:,2),'g.',centroid3(:,1),centroid3(:,2),'k.',centroid3(:,1),centroid3(:,2),'kx');
 title(' Centroid assignment for for MNIST data set - fast global k-means with k-d trees for k = 15 ');
 
-%-----------------------------
+% ---------------------------------
+X = csvread('Overlapping_normal_SSE.dat');
+avgsse = csvread('Overlapping_normal_avgSSE.dat');
 sse = csvread('Overlapping_SSE.dat');
+
 figure(8);
-plot(sse(:,1),sse(:,2), '-ko')
+plot(avgsse(:,2), '-o')
 hold on
-plot(sse(:,1), sse(:,3), '-gx')
+plot(sse(:,3), '-kx')
 hold on
-plot(sse(:,1),sse(:,4), '-r+');
+plot(sse(:,4), '-r+');
+
 title('Clustering error for Overlapping Gaussian data set');
 xlabel(' Numbers of clusters k ') 
 ylabel(' Clustering error ') 
-legend('Normal k-means','Global k-means','Fast Global k-means with k-d','Location','northeast')
-
-purity = csvread('Overlapping_Purity.dat');
-figure(9);
-plot(purity(:,1),purity(:,2), '-ko');
-hold on
-plot(purity(:,1),purity(:,3), '-gx');
-hold on
-plot(purity(:,1),purity(:,4), '-r+');
-hold on
-title('Purity for Overlapping Gaussian data set');
-xlabel(' Numbers of clusters k ') 
-ylabel(' Purity ') 
-legend('Normal k-means','Global k-means','Fast Global k-means with k-d','Location','northwest')
-% kd = csvread('Overlapping_KD.dat');
-% figure(3);
-% plot(kd(:,1),kd(:,2), '-o');
+legend('Normal k-means Avg. SSE','Global k-means','Fast Global k-means with k-d','Location','northeast')
 
 runtime = csvread('Overlapping_runtime.dat');
-figure(10);
+figure(9);
 plot(runtime(:,1),runtime(:,2), '-ko');
 hold on
-plot(runtime(:,1),runtime(:,3), '-gx');
+plot(runtime(:,1),runtime(:,3), '-bx');
 hold on
 plot(runtime(:,1),runtime(:,4), '-r+');
 hold on
@@ -123,54 +108,41 @@ centroid1 = csvread('Overlapping_centroid_1.dat');
 centroid2 = csvread('Overlapping_centroid_2.dat');
 centroid3 = csvread('Overlapping_centroid_3.dat');
 
-figure(11);
+figure(10);
 plot(seeds(:,1),seeds(:,2),'g.',centroid1(:,1),centroid1(:,2),'k.',centroid1(:,1),centroid1(:,2),'kx');
 title(' Centroid assignment for Overlapping Gaussian data set - normal k-means for k = 15 ');
 
 
-figure(12);
+figure(11);
 plot(seeds(:,1),seeds(:,2),'g.',centroid2(:,1),centroid2(:,2),'k.',centroid2(:,1),centroid2(:,2),'kx');
 title(' Centroid assignment for Overlapping Gaussian data set - global k-means for k = 15 ');
 
-figure(13);
+figure(12);
 plot(seeds(:,1),seeds(:,2),'g.',centroid3(:,1),centroid3(:,2),'k.',centroid3(:,1),centroid3(:,2),'kx');
 title(' Centroid assignment for Overlapping Gaussian data set - fast global k-means with k-d trees for k = 15 ');
 
-
-%-----------------------------
+% --------------------------------
+X = csvread('Separate_normal_SSE.dat');
+avgsse = csvread('Separate_normal_avgSSE.dat');
 sse = csvread('Separate_SSE.dat');
-figure(14);
-plot(sse(:,1),sse(:,2), '-ko')
+
+figure(13);
+plot(avgsse(:,2), '-o')
 hold on
-plot(sse(:,1), sse(:,3), '-gx')
+plot(sse(:,3), '-kx')
 hold on
-plot(sse(:,1),sse(:,4), '-r+');
-title('Clustering error for Separate Gaussian data set');
+plot(sse(:,4), '-r+');
+
+title('Clustering error for Well Separated Gaussian data set');
 xlabel(' Numbers of clusters k ') 
 ylabel(' Clustering error ') 
-legend('Normal k-means','Global k-means','Fast Global k-means with k-d','Location','northeast')
-
-purity = csvread('Separate_Purity.dat');
-figure(15);
-plot(purity(:,1),purity(:,2), '-ko');
-hold on
-plot(purity(:,1),purity(:,3), '-gx');
-hold on
-plot(purity(:,1),purity(:,4), '-r+');
-hold on
-title('Purity for Separate Gaussian data set');
-xlabel(' Numbers of clusters k ') 
-ylabel(' Purity ') 
-legend('Normal k-means','Global k-means','Fast Global k-means with k-d','Location','northwest')
-% kd = csvread('Separate_KD.dat');
-% figure(3);
-% plot(kd(:,1),kd(:,2), '-o');
+legend('Normal k-means Avg. SSE','Global k-means','Fast Global k-means with k-d','Location','northeast')
 
 runtime = csvread('Separate_runtime.dat');
-figure(16);
+figure(14);
 plot(runtime(:,1),runtime(:,2), '-ko');
 hold on
-plot(runtime(:,1),runtime(:,3), '-gx');
+plot(runtime(:,1),runtime(:,3), '-bx');
 hold on
 plot(runtime(:,1),runtime(:,4), '-r+');
 hold on
@@ -179,24 +151,32 @@ xlabel(' Numbers of clusters k ')
 ylabel(' Runtime ') 
 legend('Normal k-means','Global k-means','Fast Global k-means with k-d','Location','northwest')
 
+kdo = csvread('Overlapping_KD.dat');
+kds = csvread('Separate_KD.dat');
+
+figure(15);
+plot(kdo(:,1), kdo(:,2), '-bx')
+hold on
+plot(kds(:,1),kds(:,2), '-r+');
+title('Bucket size vs Cluster SSE - Overlapping, Separate Gaussian');
+xlabel(' Numbers of buckets ') 
+ylabel(' Clustering error ') 
+legend('Overlapping','Separate','Location','northeast')
+
 seeds = csvread('Separate_seeds.dat');
 centroid1 = csvread('Separate_centroid_1.dat');
 centroid2 = csvread('Separate_centroid_2.dat');
 centroid3 = csvread('Separate_centroid_3.dat');
 
-figure(17);
+figure(16);
 plot(seeds(:,1),seeds(:,2),'g.',centroid1(:,1),centroid1(:,2),'k.',centroid1(:,1),centroid1(:,2),'kx');
-title(' Centroid assignment for Separate Gaussian data set - normal k-means for k = 15 ');
+title(' Separate Gaussian data set - normal k-means for k = 15 ');
 
+
+figure(17);
+plot(seeds(:,1),seeds(:,2),'g.',centroid2(:,1),centroid2(:,2),'k.',centroid2(:,1),centroid2(:,2),'kx');
+title(' Separate Gaussian data set - global k-means for k = 15 ');
 
 figure(18);
-plot(seeds(:,1),seeds(:,2),'g.',centroid2(:,1),centroid2(:,2),'k.',centroid2(:,1),centroid2(:,2),'kx');
-title(' Centroid assignment for Separate Gaussian data set - global k-means for k = 15 ');
-
-figure(19);
 plot(seeds(:,1),seeds(:,2),'g.',centroid3(:,1),centroid3(:,2),'k.',centroid3(:,1),centroid3(:,2),'kx');
-title(' Centroid assignment for Separate Gaussian data set - fast global k-means with k-d trees for k = 15 ');
-
-
-        
-        
+title(' Separate Gaussian data set - fast global k-means with k-d trees for k = 15 ');

@@ -1,10 +1,10 @@
 Project 1: Global K-means clustering algorithm
 
-Saividhya Saibaba
+Saividhya Saibaba 
 Rukmani Ganapathy Seetharaman
 
-List of files under code/ folder 
----------------------------------
+List of files 
+--------------
 
 computeKMeans.m           -   Computes k centroids using normal k-means algorithm
 kmeansClustering.m        -   Caller program for normal k-means algorithm
@@ -34,8 +34,8 @@ t10k-labels-idx1-ubyte
 train-images-idx3-ubyte
 train-labels-idx1-ubyte
 
-Test script execution - testscript/ folder
--------------------------------------
+Test script execution
+-----------------------
 
 We have stored all intermediate values in data folder
-Run testscript/plot_graph.m to view the graphs
+Run data/plot_graph.m to view the graphs
