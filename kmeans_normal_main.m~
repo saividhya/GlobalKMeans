@@ -1,0 +1,11 @@
+m_seeds = csvread('data/MNIST_seeds.dat');
+m_labels = csvread('data/MNIST_labels.dat');
+o_seeds = csvread('data/Overlapping_seeds.dat');
+o_labels = csvread('data/Overlapping_labels.dat');
+s_seeds = csvread('data/Separate_seeds.dat');
+s_labels = csvread('data/Separate_labels.dat');
+load 'fisheriris.mat';
+kmeansMain_normalavg(m_seeds,m_labels,'MNIST');
+kmeansMain_normalavg(o_seeds,o_labels,'Overlapping');
+kmeansMain_normalavg(s_seeds,s_labels,'Separate');
+kmeansMain_normalavg(meas,s_labels,'Separate');
