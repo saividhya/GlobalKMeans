@@ -1,3 +1,4 @@
+%http://ufldl.stanford.edu/wiki/index.php/Using_the_MNIST_Dataset
 function labels = loadMNISTLabels(filename)
 %loadMNISTLabels returns a [number of MNIST images]x1 matrix containing
 %the labels for the MNIST images

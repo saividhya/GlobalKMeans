@@ -1,3 +1,5 @@
+
+%http://ufldl.stanford.edu/wiki/index.php/Using_the_MNIST_Dataset
 function images = loadMNISTImages(filename)
 %loadMNISTImages returns a 28x28x[number of MNIST images] matrix containing
 %the raw MNIST images
