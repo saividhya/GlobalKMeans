@@ -17,30 +17,30 @@
 for i=1:19
     clf(figure(i))
 end
-sse = csvread('MNIST_SSE.dat');
-figure(1);
-plot(sse(:,1),sse(:,2), '-ko')
-hold on
-plot(sse(:,1), sse(:,3), '-gx')
-hold on
-plot(sse(:,1),sse(:,4), '-r+');
-title('Clustering error for MNIST data set');
-xlabel(' Numbers of clusters k ') 
-ylabel(' Clustering error ') 
-legend('Normal k-means','Global k-means','Fast Global k-means with k-d','Location','northeast')
-
-purity = csvread('MNIST_Purity.dat');
-figure(2);
-plot(purity(:,1),purity(:,2), '-ko');
-hold on
-plot(purity(:,1),purity(:,3), '-gx');
-hold on
-plot(purity(:,1),purity(:,4), '-r+');
-hold on
-title('Purity for MNIST data set');
-xlabel(' Numbers of clusters k ') 
-ylabel(' Purity ') 
-legend('Normal k-means','Global k-means','Fast Global k-means with k-d','Location','northwest')
+% sse = csvread('MNIST_SSE.dat');
+% figure(1);
+% plot(sse(:,1),sse(:,2), '-ko')
+% hold on
+% plot(sse(:,1), sse(:,3), '-gx')
+% hold on
+% plot(sse(:,1),sse(:,4), '-r+');
+% title('Clustering error for MNIST data set');
+% xlabel(' Numbers of clusters k ') 
+% ylabel(' Clustering error ') 
+% legend('Normal k-means','Global k-means','Fast Global k-means with k-d','Location','northeast')
+% 
+% purity = csvread('MNIST_Purity.dat');
+% figure(2);
+% plot(purity(:,1),purity(:,2), '-ko');
+% hold on
+% plot(purity(:,1),purity(:,3), '-gx');
+% hold on
+% plot(purity(:,1),purity(:,4), '-r+');
+% hold on
+% title('Purity for MNIST data set');
+% xlabel(' Numbers of clusters k ') 
+% ylabel(' Purity ') 
+% legend('Normal k-means','Global k-means','Fast Global k-means with k-d','Location','northwest')
 % kd = csvread('MNIST_KD.dat');
 % figure(3);
 % plot(kd(:,1),kd(:,2), '-o');

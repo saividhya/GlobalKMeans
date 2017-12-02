@@ -1,0 +1,56 @@
+X = csvread('MNIST_normal_SSE.dat');
+avgsse = csvread('MNIST_normal_avgSSE.dat');
+sse = csvread('MNIST_SSE.dat');
+
+for i=1:3
+    clf(figure(i))
+end
+figure(1);
+boxplot(X(:,2),X(:,1))
+hold on
+plot(avgsse(:,2), '-o')
+hold on
+plot(sse(:,3), 'kx','LineWidth', 2)
+hold on
+plot(sse(:,4), 'r+','LineWidth', 2);
+
+title('Clustering error for MNIST data set');
+xlabel(' Numbers of clusters k ') 
+ylabel(' Clustering error ') 
+legend('Normal k-means Avg. SSE','Global k-means','Fast Global k-means with k-d','Location','northeast')
+
+X = csvread('Overlapping_normal_SSE.dat');
+avgsse = csvread('Overlapping_normal_avgSSE.dat');
+sse = csvread('Overlapping_SSE.dat');
+
+figure(2);
+boxplot(X(:,2),X(:,1))
+hold on
+plot(avgsse(:,2), '-o')
+hold on
+plot(sse(:,3), 'kx','LineWidth', 2)
+hold on
+plot(sse(:,4), 'r+','LineWidth', 2);
+
+title('Clustering error for Overlapping Gaussian data set');
+xlabel(' Numbers of clusters k ') 
+ylabel(' Clustering error ') 
+legend('Normal k-means Avg. SSE','Global k-means','Fast Global k-means with k-d','Location','northeast')
+
+X = csvread('Separate_normal_SSE.dat');
+avgsse = csvread('Separate_normal_avgSSE.dat');
+sse = csvread('Separate_SSE.dat');
+
+figure(3);
+boxplot(X(:,2),X(:,1))
+hold on
+plot(avgsse(:,2), '-o')
+hold on
+plot(sse(:,3), 'kx','LineWidth', 2)
+hold on
+plot(sse(:,4), 'r+','LineWidth', 2);
+
+title('Clustering error for Well Separated Gaussian data set');
+xlabel(' Numbers of clusters k ') 
+ylabel(' Clustering error ') 
+legend('Normal k-means Avg. SSE','Global k-means','Fast Global k-means with k-d','Location','northeast')
